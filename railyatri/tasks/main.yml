@@ -10,20 +10,20 @@
   docker_container:
     name: nginx_container
     state: stopped
-  when: nginx_container_running is defined and nginx_container_running.containers | length > 0
+      #when: nginx_container_running is defined and nginx_container_running.containers | length > 0
   become: yes
 
 - name: Remove Nginx container if it exists
   docker_container:
     name: nginx_container
     state: absent
-  when: nginx_container_running is defined and nginx_container_running.containers | length > 0
+      #when: nginx_container_running is defined and nginx_container_running.containers | length > 0
   become: yes
 
 - name: Pull Nginx image from Docker Hub
   docker_image:
     name: "{{ docker_image }}"
-    pull: yes
+    source: pull
   become: yes
 
 - name: Create and run Nginx container with parameters

@@ -1,5 +1,5 @@
 ---
-docker_image: nginx:latest
+docker_image: "nginx:latest"
 docker_volume: /opt/nginx:/opt/nginx
 docker_port: 80
 docker_host_port: 80
