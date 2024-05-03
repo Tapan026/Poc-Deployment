@@ -1,0 +1,6 @@
+---
+- name: Manage Docker containers with Ansible
+  hosts: localhost
+  become: true
+  roles:
+    - docker-app
