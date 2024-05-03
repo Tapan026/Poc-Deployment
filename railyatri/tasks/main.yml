@@ -4,23 +4,27 @@
     name: nginx_container
   register: nginx_container_running
   ignore_errors: yes
+  become: yes
 
 - name: Stop Nginx container if running
   docker_container:
     name: nginx_container
     state: stopped
   when: nginx_container_running is defined and nginx_container_running.containers | length > 0
+  become: yes
 
 - name: Remove Nginx container if it exists
   docker_container:
     name: nginx_container
     state: absent
   when: nginx_container_running is defined and nginx_container_running.containers | length > 0
+  become: yes
 
 - name: Pull Nginx image from Docker Hub
   docker_image:
     name: "{{ docker_image }}"
     pull: yes
+  become: yes
 
 - name: Create and run Nginx container with parameters
   docker_container:
@@ -31,3 +35,5 @@
       - "{{ docker_host_port }}:{{ docker_port }}"
     volumes:
       - "{{ docker_volume }}"
+  become: yes
+
